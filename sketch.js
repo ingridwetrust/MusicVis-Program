@@ -88,7 +88,22 @@ function mouseClicked() {
 }
 
 function keyPressed() {
-    controls.keyPressed(keyCode);
+  // If controls hasn't loaded yet, do nothing and exit the function
+  if (!controls) {
+    return;
+  }
+  controls.keyPressed(keyCode);
+}
+
+function windowResized() {
+  // If vis hasn't loaded yet, do nothing and exit the function
+  if (!vis) {
+    return;
+  }
+  resizeCanvas(windowWidth, windowHeight);
+  if (vis.selectedVisual && vis.selectedVisual.windowResized) {
+    vis.selectedVisual.windowResized();
+  }
 }
 
 //when the window has been resized. Resize canvas to fit
